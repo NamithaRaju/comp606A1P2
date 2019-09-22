@@ -1,6 +1,7 @@
 <?php
 	session_start();
-	require_once('config.php');
+  require_once('config.php');
+  $username=$_SESSION['name'];
 ?>
 
 <!DOCTYPE html>
@@ -8,9 +9,9 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-    body {
+body {
 	font-size: 120%;
-	background-image: url("massage.jpg");
+	background-image: url("sports-massage.jpg");
 	background-repeat: no-repeat;
     background-size: cover;
     font-family: Arial, Helvetica, sans-serif;
@@ -22,7 +23,8 @@
   background-color: #333;
 }
 
-.topnav a {
+.topnav a 
+{
   float: right;
   color: #f2f2f2;
   text-align: center;
@@ -64,7 +66,7 @@
 <body>
 
 <div class="topnav">
-  <a href="#contact">Contact Us</a>
+  <a href="contact.php">Contact Us</a>
   <a href="cancellation.php">Cancel Appointment</a>
   <a href="appointment.php">Make Appointment</a>
   <a href="login.php">Login</a>
@@ -77,7 +79,7 @@
 <div>
 <!-- notification message -->
     <h3>
-    Your appointment has been made!!!
+    <?php echo $username ?> appointment has been made!!!
     </h3>
 <!-- logged in user information -->
 
