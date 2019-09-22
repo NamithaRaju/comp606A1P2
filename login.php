@@ -1,75 +1,138 @@
-<?php
-session_start();
-require_once('config.php');
-require_once('navbar.php');
 
+<?php
+	session_start();
+	require_once('config.php');
 ?>
 
 <!DOCTYPE html>
 <html>
-
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="style1.css">
-	<!--we will create a seperate style for the pages than we have for the forms-->
-</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+	body {
+	font-size: 100%;
+	background-image: url("massage.jpg");
+	background-repeat: no-repeat;
+    background-size: cover;
+    font-family: Arial, Helvetica, sans-serif;
+  }
 
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: right;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+input{
+    width: 450px;
+	margin: 0 auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+.main-block {
+    border-bottom: 8px;
+    min-height: 100px;
+}
+
+#main-border{
+	border-radius : 10px;
+	background-color: white;
+	border: 3px solid #133783;
+	width: 500px;
+	margin: 0 auto;
+}
+.main-form{
+	width:450px;
+	margin:0 auto;
+}
+.login_button {
+    background-color: #4CAF50;
+    color: white;
+    margin-top:10px;
+    margin-bottom: 10px;
+    padding:10px;
+    width: 100%;
+	font-size:18px;
+	font-weight: bold;
+}
+</style>
+</head>
 <body>
 
-	<?php
-	get_navbar(0); ?>
+<div class="topnav">
+  <a href="contact.php">Contact Us</a>
+  <a class="active" href="login.php">Sign In</a>
+  <a href="about.php">About Me</a>
+  <a href="home.php">Home</a>
+</div>
 
-	<div class="main-block">
-	</div>
+<div class="main-block">
+</div>
 	<div id="main-border">
-		<center>
-			<h2>Login Form</h2>
-		</center>
-
+	<center><h2>Login Form</h2></center>
+			
 		<form action="login.php" method="post">
-
+		
 			<div class="main-form">
 				<input type="text" placeholder="Enter Username or email" name="username" required>
 				<input type="password" placeholder="Enter Password" name="password" required>
 				<a href="resetpassword.php" class="reset_pwd">Forgotten Password</a>
 				<button class="login_button" name="login" type="submit">Login</button>
-				<a href="register.php"><button type="button" class="register_btn">Therapist Registration</button></a>
 			</div>
 		</form>
-
+		
 		<?php
-		if (isset($_POST['login'])) {
-			$username = $_POST['username'];
-
-			$password = $_POST['password'];
-			// $query = "select * from appointments where name='$username' and password='$password' ";
-			$query = "select * from users where username='$username' and password='$password' ";
-
-			//echo $query;
-			$query1 = "SELECT * FROM therapists WHERE username='$username' AND password='$password'";
-			$query_run = mysqli_query($db, $query);
-			$query_run1 = mysqli_query($db, $query1);
-			//echo mysql_num_rows($query_run);
-			if ($query_run) {
-				if (mysqli_num_rows($query_run) > 0) {
-
+			if(isset($_POST['login']))
+			{
+				$username=$_POST['username'];
+				$password=$_POST['password'];
+				//echo $query;
+				$query = "SELECT * FROM therapists WHERE username='$username' AND password='$password'";
+				$query_run = mysqli_query($db,$query);
+				//echo mysql_num_rows($query_run);
+				if($query_run)
+				{
+					if(mysqli_num_rows($query_run)>0)
+					{
+					
 					$_SESSION['username'] = $username;
 					$_SESSION['password'] = $password;
-
-					header("Location: form.php");
-				} else {
-					echo '<script type="text/javascript">alert("No such User exists. Invalid Credentials")</script>';
-				}
-			} elseif ($query_run1) {
-				header("Location: therapist.php");
-			} else {
+					
+					header( "Location: therapist.php");
+					}
+					else
+					{
+						echo '<script type="text/javascript">alert("No such User exists. Invalid Credentials")</script>';
+					}
+				
+			}
+			else
+			{
 				echo '<script type="text/javascript">alert("Database Error")</script>';
 			}
-		} else { }
+		}
+		
 		?>
-
+		
 	</div>
 
 </body>
-
 </html>
