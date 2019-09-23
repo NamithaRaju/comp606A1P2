@@ -75,7 +75,7 @@
 <h1>Welcome to Sports Massage Hamilton<h1>
 </div>
 <div>
-
+<!--shows details of admins of the site to contact-->
     <h3>Email us: ann@hotmail.co.nz<br> nam@gmail.com</h3>
 
 </div>
