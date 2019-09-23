@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <!--title of page-->
 <title>Reset Password</title>
 <style>
 input{
@@ -56,8 +57,9 @@ input{
 <div class="main-block">
 </div>
 	<div id="main-border">
+	<!--title of form-->
 	<center><h2>Reset Password Form</h2></center>
-			
+			<!--form-->
 		<form action="resetpassword.php" method="post">
 		
 			<div class="main-form">
@@ -69,6 +71,7 @@ input{
 		</form>
 		
 		<?php
+		// this code is for handling the Reset appointment form
 			if(isset($_POST['reset']))
 			{
 				$username=$_POST['username'];
@@ -76,7 +79,7 @@ input{
 				$password=$_POST['password'];
 				$cpassword=$_POST['cpassword'];
 				
-				if($password==$cpassword)
+				if($password==$cpassword)//checking passwords
 				{
 					$query = "select * from therapists where username='$username'";
 					//echo $query;
@@ -84,9 +87,10 @@ input{
                     if($query_run){
                         $query1 = "update therapists set password='$password' where username='$username'";
                         $query_run = mysqli_query($db,$query1);
-                        header("location:login.php");
+                        header("location:login.php");//redirects to loginpage
                     }
                     else{
+						//showing alert message
                         echo '<script type="text/javascript">alert(This username not exists. Please try later</script>';
                     }
 
