@@ -54,10 +54,10 @@
 
 <div class="topnav">
   <a href="contact.php">Contact Us</a>
+  <a href="about.php">About Me</a>
   <a href="cancellation.php">Cancel Appointment</a>
   <a href="appointment.php">Make Appointment</a>
-  <a href="login.php">Login</a>
-  <a href="about.php">About Me</a>
+  <a href="login.php">Sign In</a>
   <a class="active" href="home.php">Home</a>
 </div>
 
@@ -66,6 +66,7 @@
 
 <div class="table">
     <?php
+    //connection to the database
     $db = mysqli_connect('localhost', 'root', '', 'booking');
     $result = mysqli_query($db,"SELECT name,email,reason,timeslot FROM appointments");
 
