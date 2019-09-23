@@ -61,6 +61,7 @@
   <a href="home.php">Home</a>
 </div>
 <div>
+<!--shows a brief information about the site-->
 <h1>Welcome to Sports Massage Hamilton<h1>
 
 <p style="font-size:16px;">Sports Massage Hamilton is a clinic which was established in 2015 by Ann Davies and have 2 different 
