@@ -46,6 +46,7 @@
 		</form>
 		
 		<?php
+		//this code is for handling the cancellation form
 			if(isset($_POST['cancel']))
 			{
 				$name=$_POST['name'];
@@ -54,21 +55,21 @@
 				$date = date('Y-m-d H:i:s');
 
 				
-				$password=md5($_POST['password']);
+				$password=md5($_POST['password']);//encrypts the password
 				$query="select * from appointments where name='$name' and password='$password'";
 				$query_run = mysqli_query($db,$query);
 				if($query_run)
 				{
-					$diff= strtotime($date)-strtotime($timeslot);
+					$diff= strtotime($date)-strtotime($timeslot);//checking the timeslots by taking the difference
 					$query1="delete from appointments where name='$name' and password='$password'";
 					mysqli_query($db,$query1);
-					if($diff>=86400)
+					if($diff>=86400)//checking whether a customer cancel booking with 24 hours leading
 					{
-						$query1="delete from appointments where name='$name' and password='$password'";
+						$query1="delete from appointments where name='$name' and password='$password'";//delete from table appointments
 						$query_run1=mysqli_query($db,$query1);
 						if($query_run1)
 						{
-
+                          //showing message for the customers that they have been charged a cancellation fee
 							$_SESSION['success'] = "Your appointment has been cancelled and you have been charged a small fee for late cancellation!!!";
 							header( "Location: cancelfinish.php");	
 						}
