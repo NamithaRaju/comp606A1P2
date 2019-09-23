@@ -80,32 +80,26 @@
 						echo '<script type="text/javascript">alert("Timeslot does not exist")</script>';
 						}
 					else{
-						$query="insert into appointments values ('','$name','$email', '$password1','$creditcard','$reason','$timeslot','$massage')";
-						//echo $query;
-						echo "<script>console.log('$query')</script>";
-
-						$query_run = mysqli_query($db,$query);
-						if($query_run)
-						{
-							// Checks if appointment time has allready been filled
-							$appointment_check_query = "SELECT * FROM appointments WHERE timeslot='$timeslot' LIMIT 1";
-							$result = mysqli_query($db, $appointment_check_query);
-							$appoint = mysqli_fetch_assoc($result);
-							if($appoint){
-								$_SESSION['name'] = $name;
-								$_SESSION['email'] = $email;
-								$_SESSION['timeslot'] = $timeslot;
-								header( "Location: customerinfo.php");		
-								}
-							
-						}
+						$query2="select * from appointments where timeslot='$timeslot' LIMIT 1";
+						$query_run2 = mysqli_query($db,$query2);
+						$timecheck1 = mysqli_fetch_assoc($query_run2);
+						echo "<script>console.log('$timecheck1','$timeslot')</script>";
+						// Checks if appointment time has already been filled
+						if(timecheck1<1){
+							$query="insert into appointments values ('','$name','$email', '$password1','$creditcard','$reason','$timeslot','$massage')";
+							mysqli_query($db,$query);
+							$_SESSION['name'] = $name;
+							header( "Location: customerinfo.php");		
+							}
 						else
 						{
-							echo '<script type="text/javascript">alert("Booking Unsuccessful due to server error. Please try later")</script>';
+							echo '<script type="text/javascript">alert("Appointment time has already been filled. Please try later")</script>';
 						}
 					}
+				
 
 			}
+		
 		
 		?>
 		
