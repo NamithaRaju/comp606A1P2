@@ -87,8 +87,9 @@ input{
 <div class="main-block">
 </div>
 	<div id="main-border">
+	<!--title of form-->
 	<center><h2>Login Form</h2></center>
-			
+			<!--form-->
 		<form action="login.php" method="post">
 		
 			<div class="main-form">
@@ -100,11 +101,13 @@ input{
 		</form>
 		
 		<?php
+		// this code is for logging(loging?) in
 			if(isset($_POST['login']))
 			{
 				$username=$_POST['username'];
 				$password=$_POST['password'];
 				//echo $query;
+				//select username and password from therapists to variable query
 				$query = "SELECT * FROM therapists WHERE username='$username' AND password='$password'";
 				$query_run = mysqli_query($db,$query);
 				//echo mysql_num_rows($query_run);
@@ -116,16 +119,18 @@ input{
 					$_SESSION['username'] = $username;
 					$_SESSION['password'] = $password;
 					
-					header( "Location: therapist.php");
+					header( "Location: therapist.php");//redirects to therapists page
 					}
 					else
 					{
+						//gives alert when the username  and password doesnot exist in the db
 						echo '<script type="text/javascript">alert("No such User exists. Invalid Credentials")</script>';
 					}
 				
 			}
 			else
 			{
+				//gives an alert when there is any error in db
 				echo '<script type="text/javascript">alert("Database Error")</script>';
 			}
 		}
