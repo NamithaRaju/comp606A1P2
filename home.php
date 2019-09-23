@@ -64,7 +64,9 @@
 
 <div class="table">
     <?php
+    //connect with the database
     $db = mysqli_connect('localhost', 'root', '', 'booking');
+     //select details from tables timeslot and therapists to variable result
     $result = mysqli_query($db,"SELECT timeslot, therapistname
       FROM timeslots, therapists
       WHERE timeslots.therapistid = therapists.therapistid");
